@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-const Product = ({ title, image, price, id, onIdChange }) => {
-
+const Product = ({ title, image, id, onIdChange, }) => {
+//ส่งค่า id มาเก็บไว้และส่งออกไปให้ App Component เรียกใช้
   const handleIdChange = () => {
     onIdChange(id); 
   };
