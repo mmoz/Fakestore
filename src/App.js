@@ -16,9 +16,9 @@ function App() {
 
 
 
- //fetch API ของ ProductId ที่ถูกเลือก
+ //fetch API ตามค่า State selectedProductId
 const fetchDes = async () => {
-  setDescription({}); // or setDescription(null);
+  setDescription({});
   const res = await fetch(
     `https://fakestoreapi.com/products/${selectedProductId}`
   );
@@ -56,7 +56,7 @@ const fetchDes = async () => {
   }, [selectedProductId]);
 
 
-// เซ็ตค่า SelectedProductId ให้เท่ากับ id ที่ส่งมา
+// setSelectedProductId ให้เท่ากับ id จาก Product Component
  const handleIdChange = (id) => {
    setSelectedProductId(id);
    localStorage.setItem("selectedProductId", id);
