@@ -7,7 +7,6 @@ import Description from "./Components/Description";
 
 
 function App() {
-  const [cart, setCart] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(() => {
@@ -17,9 +16,7 @@ function App() {
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [description, setDescription] = useState([]);
 
-    const addToCart = (product) => {
-      setCart([...cart, product]);
-    };
+  
 
   //fetch API ของ ProductId ที่ถูกเลือก
   const fetchDes = async () => {
@@ -70,7 +67,6 @@ function App() {
   }, []);
 
   return (
-
     loading && (
       <div className="App">
         <BrowserRouter>
@@ -102,7 +98,8 @@ function App() {
               element={
                 <Description
                   {...description}
-                  key={selectedProductId}
+                  key={description.id}
+                  selectedProductId={selectedProductId}
                   setDescription={setDescription}
                 />
               }
