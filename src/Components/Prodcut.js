@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 
-const Product = ({ title, image, id, onIdChange, }) => {
-//ส่งค่า id มาเก็บไว้และส่งออกไปให้ App Component เรียกใช้
+const Product = ({ title, image, id, onIdChange,price }) => {
+  //ส่งค่า id มาเก็บไว้และส่งออกไปให้ App Component เรียกใช้
   const handleIdChange = () => {
-    onIdChange(id); 
+    onIdChange(id);
   };
+
+
 
   return (
     <div className="w-[250px] relative m-auto mt-5 border-2 h-[300px] flex flex-col justify-center items-center ">
@@ -20,7 +22,9 @@ const Product = ({ title, image, id, onIdChange, }) => {
         </h1>
       </div>
       <div className="flex justify-center mb-1  absolute bottom-5 text-white text-sm">
-        <button className="mr-5  w-[70px] rounded-xl bg-[orange]">
+        <button
+          className="mr-5  w-[70px] rounded-xl bg-[orange]"
+        >
           Purchase
         </button>
         <Link to={`/description/${id}`}>

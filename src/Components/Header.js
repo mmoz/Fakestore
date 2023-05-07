@@ -1,9 +1,13 @@
 import Pokemon from "../images/Pokemon.png";
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import {useState} from 'react'
+import './Header.css'
 
 
 const Header = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <header className="border-2 h-auto bg-[orange] sm:h-[150vh] md:h-auto">
       <nav className="h-[2.5rem] flex justify-between">
@@ -18,7 +22,7 @@ const Header = () => {
           <li>about us</li>
         </ul>
         <div className="mt-[0.625rem] mr-[5%] relative">
-          <button>
+          <button onClick={() => setShowModal(!showModal)}>
             <AiOutlineShoppingCart />
           </button>
           <div className="absolute top-[-30%] right-[-20%]">
@@ -54,6 +58,9 @@ const Header = () => {
               More
             </button>
           </div>
+        </div>
+        <div className={showModal ? "modal" : "hidden"}>
+          <h1>Product</h1>
         </div>
       </div>
     </header>
