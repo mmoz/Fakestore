@@ -1,7 +1,9 @@
-const Description = ({ title, description, image, price }) => {
+const Description = ({ title, description, image, price ,loadingdes }) => {
   return (
-    <section className="flex justify-center">
-      <div className="mt-[50px] h-[600px] border-2 max-w-[200px]">
+    <>
+    {loadingdes ? (
+      <section className="flex justify-center">
+      <div className="mt-[50px] h-auto border-2 max-w-[200px]">
         <div className="w-[96%] m-auto">
           <img src={image} />
         </div>
@@ -19,6 +21,9 @@ const Description = ({ title, description, image, price }) => {
         </div>
       </div>
     </section>
+    ):(<div><p>Loading</p></div>)   }
+     </>
+
   );
 };
 export default Description;

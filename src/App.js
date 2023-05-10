@@ -15,6 +15,7 @@ function App() {
   });
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [description, setDescription] = useState([]);
+  const [loadingdes,setLoadingdes] = useState(false);
 
   
 
@@ -24,6 +25,8 @@ function App() {
     const res = await fetch(
       `https://fakestoreapi.com/products/${selectedProductId}`
     );
+    setLoadingdes(true)
+
     if (res.ok) {
       try {
         const data = await res.json();
@@ -51,6 +54,9 @@ function App() {
 
   useEffect(() => {
     fetchDes();
+    setLoadingdes(false)
+
+   
   }, [selectedProductId]);
 
   // เซ็ตค่า SelectedProductId ให้เท่ากับ id ที่ส่งมา
@@ -67,7 +73,8 @@ function App() {
   }, []);
 
   return (
-    loading && (
+    <>
+    {loading ? (
       <div className="App">
         <BrowserRouter>
           <Header />
@@ -101,14 +108,16 @@ function App() {
                   key={description.id}
                   selectedProductId={selectedProductId}
                   setDescription={setDescription}
+                  loadingdes={loadingdes}
                 />
               }
             ></Route>
           </Routes>
         </BrowserRouter>
       </div>
-    )
-  );
+    ) : ( <div><p>..loading</p></div>)}</>
+  )
 }
+
 
 export default App;
