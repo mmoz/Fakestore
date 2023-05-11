@@ -16,6 +16,8 @@ function App() {
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [description, setDescription] = useState([]);
   const [loadingdes,setLoadingdes] = useState(false);
+  const [cart, setCart] = useState([]);
+
 
   
 
@@ -75,7 +77,7 @@ function App() {
   return (
       <div className="App">
         <BrowserRouter>
-          <Header/>
+          <Header cart={cart}/>
 
           <Routes>
             <Route

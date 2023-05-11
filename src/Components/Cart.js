@@ -27,6 +27,7 @@ const Cart = () => {
           <li key={index} className='flex justify-evenly border-2 h-[10vh] overflow-auto'>
             <span>{item.id}</span>
             <img src={item.image} className='w-[5vw]'/>
+            {item.quantity}
             {item.name} - ${item.price}
             <button onClick={() => removeItemFromCart(item)}>Remove</button>
           </li>
