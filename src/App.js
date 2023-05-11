@@ -73,8 +73,6 @@ function App() {
   }, []);
 
   return (
-    <>
-    {loading ? (
       <div className="App">
         <BrowserRouter>
           <Header/>
@@ -82,22 +80,22 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={
-                <>
-                  <div className="mt-10">
-                    <h1 className="text-center">Product</h1>
-                  </div>
-                  <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
-                    {data &&
-                      data.map((item) => (
-                        <Product
-                          key={item.id}
-                          {...item}
-                          onIdChange={handleIdChange}
-                        />
-                      ))}
-                  </div>
-                </>
+              element={loading ?(  <>
+                <div className="mt-10">
+                  <h1 className="text-center">Product</h1>
+                </div>
+                <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
+                  {data &&
+                    data.map((item) => (
+                      <Product
+                        key={item.id}
+                        {...item}
+                        onIdChange={handleIdChange}
+                      />
+                    ))}
+                </div>
+              </>):(<div className="flex justify-center"><span>..loading</span></div>)
+              
               }
             ></Route>
             <Route path="/description/:selectedProductId"
@@ -114,7 +112,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </div>
-    ) : ( <div className="flex justify-center items-center"><p>..loading</p></div>)}</>
   )
 }
 
