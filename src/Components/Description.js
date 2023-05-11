@@ -21,7 +21,7 @@ const Description = ({ title, description, image, price ,loadingdes }) => {
         </div>
       </div>
     </section>
-    ):(<div><p>Loading</p></div>)   }
+    ):(<div className="flex justify-center items-center"><p>Loading</p></div>)   }
      </>
 
   );

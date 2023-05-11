@@ -56,7 +56,7 @@ function App() {
     fetchDes();
     setLoadingdes(false)
 
-   
+   // eslint-disable-next-line
   }, [selectedProductId]);
 
   // เซ็ตค่า SelectedProductId ให้เท่ากับ id ที่ส่งมา
@@ -77,7 +77,7 @@ function App() {
     {loading ? (
       <div className="App">
         <BrowserRouter>
-          <Header />
+          <Header/>
 
           <Routes>
             <Route
@@ -100,8 +100,7 @@ function App() {
                 </>
               }
             ></Route>
-            <Route
-              path="/description/:selectedProductId"
+            <Route path="/description/:selectedProductId"
               element={
                 <Description
                   {...description}
@@ -115,7 +114,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </div>
-    ) : ( <div><p>..loading</p></div>)}</>
+    ) : ( <div className="flex justify-center items-center"><p>..loading</p></div>)}</>
   )
 }
 

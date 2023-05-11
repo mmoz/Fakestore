@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 
-const Product = ({ title, image, id, onIdChange,price }) => {
+const Product = ({ title, image, id, onIdChange,price  }) => {
   //ส่งค่า id มาเก็บไว้และส่งออกไปให้ App Component เรียกใช้
   const handleIdChange = () => {
     onIdChange(id);
   };
-
+  const handlePurchase = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const item = { id, title, price,image};
+    cart.push(item);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
 
 
   return (
@@ -24,6 +29,8 @@ const Product = ({ title, image, id, onIdChange,price }) => {
       <div className="flex justify-center mb-1  absolute bottom-5 text-white text-sm">
         <button
           className="mr-5  w-[70px] rounded-xl bg-[orange]"
+          onClick={handlePurchase}
+
         >
           Purchase
         </button>

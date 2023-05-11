@@ -1,9 +1,9 @@
 import Pokemon from "../images/Pokemon.png";
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import {useState} from 'react'
-import './Header.css'
-
+import { useState } from "react";
+import "./Header.css";
+import Cart from "./Cart";
 
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
@@ -61,6 +61,7 @@ const Header = () => {
         </div>
         <div className={showModal ? "modal" : "hidden"}>
           <h1>Product</h1>
+          <Cart/>
         </div>
       </div>
     </header>
