@@ -5,9 +5,7 @@ import Product from "./Components/Prodcut";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Description from "./Components/Description";
 
-
 function App() {
-
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(() => {
     const cachedData = localStorage.getItem("productData");
@@ -15,11 +13,46 @@ function App() {
   });
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [description, setDescription] = useState([]);
-  const [loadingdes,setLoadingdes] = useState(false);
   const [cart, setCart] = useState([]);
+  const [loadcart, setLoadcart] = useState(false);
+  const [cartLength, setCartLength] = useState(0);
 
+  const handlePurchase = (item) => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  
+    // Check if the item is already in the cart
+    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+
+    if (existingItem) {
+      // If the item is already in the cart, update its quantity
+      const updatedCart = cart.map((cartItem) => {
+        if (cartItem.id === item.id) {
+          return { ...cartItem, quantity: cartItem.quantity + 1 };
+        }
+        return cartItem;
+      });
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      setCart(updatedCart);
+    } else {
+      // If the item is not in the cart, add it
+      const updatedCart = [...cart, { ...item, quantity: 1 }];
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      setCart(updatedCart);
+    }
+    //หลังจากเพิ่มสินค้าในตะกร้าให้มาเปลี่ยนแปลงค่าใน state cart เพื่อ ให้ state cart ส่งไปใช้ update ค่าใน useEffect ของ Component Class
+    setLoadcart(!loadcart);
+    //จำนวนสินค้า
+    setCartLength(cart.length);
+  };
+  //จำนวนสินค้าเดิมที่มีอยู่ในตะกร้าแล้วกดเพิ่มจะถูกนับเพิ่ม
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const totalQuantity = cart.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    setCartLength(totalQuantity);
+  }, [cart]);
 
   //fetch API ของ ProductId ที่ถูกเลือก
   const fetchDes = async () => {
@@ -27,8 +60,6 @@ function App() {
     const res = await fetch(
       `https://fakestoreapi.com/products/${selectedProductId}`
     );
-    setLoadingdes(true)
-
     if (res.ok) {
       try {
         const data = await res.json();
@@ -56,9 +87,6 @@ function App() {
 
   useEffect(() => {
     fetchDes();
-    setLoadingdes(false)
-
-   // eslint-disable-next-line
   }, [selectedProductId]);
 
   // เซ็ตค่า SelectedProductId ให้เท่ากับ id ที่ส่งมา
@@ -75,47 +103,53 @@ function App() {
   }, []);
 
   return (
+    loading && (
       <div className="App">
         <BrowserRouter>
-          <Header cart={cart}/>
+          <Header
+            loadcart={loadcart}
+            cartLength={cartLength}
+            setCartLength={setCartLength}
+          />
 
           <Routes>
             <Route
               path="/"
-              element={loading ?(  <>
-                <div className="mt-10">
-                  <h1 className="text-center">Product</h1>
-                </div>
-                <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
-                  {data &&
-                    data.map((item) => (
-                      <Product
-                        key={item.id}
-                        {...item}
-                        onIdChange={handleIdChange}
-                      />
-                    ))}
-                </div>
-              </>):(<div className="flex justify-center"><span>..loading</span></div>)
-              
+              element={
+                <>
+                  <div className="mt-10">
+                    <h1 className="text-center">Product</h1>
+                  </div>
+                  <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
+                    {data &&
+                      data.map((item) => (
+                        <Product
+                          key={item.id}
+                          {...item}
+                          onIdChange={handleIdChange}
+                          handlePurchase={() => handlePurchase(item)}
+                        />
+                      ))}
+                  </div>
+                </>
               }
             ></Route>
-            <Route path="/description/:selectedProductId"
+            <Route
+              path="/description/:selectedProductId"
               element={
                 <Description
                   {...description}
                   key={description.id}
                   selectedProductId={selectedProductId}
                   setDescription={setDescription}
-                  loadingdes={loadingdes}
                 />
               }
             ></Route>
           </Routes>
         </BrowserRouter>
       </div>
-  )
+    )
+  );
 }
-
 
 export default App;

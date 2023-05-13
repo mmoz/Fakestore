@@ -1,39 +1,11 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const Product = ({ title, image, id, onIdChange,price  }) => {
-  const [cart, setCart] = useState([]);
-
+const Product = ({ title, image, id, onIdChange, price, handlePurchase }) => {
   //ส่งค่า id มาเก็บไว้และส่งออกไปให้ App Component เรียกใช้
   const handleIdChange = () => {
     onIdChange(id);
   };
-  const handlePurchase = () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const item = { id, title, price, image };
-  
-    // Check if the item is already in the cart
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
-  
-    if (existingItem) {
-      // If the item is already in the cart, update its quantity
-      const updatedCart = cart.map((cartItem) => {
-        if (cartItem.id === item.id) {
-          return { ...cartItem, quantity: cartItem.quantity + 1 };
-        }
-        return cartItem;
-      });
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      setCart(updatedCart);
-    } else {
-      // If the item is not in the cart, add it
-      const updatedCart = [...cart, { ...item, quantity: 1 }];
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      setCart(updatedCart);
-    }
-  };
-  
-
 
   return (
     <div className="w-[250px] relative m-auto mt-5 border-2 h-[300px] flex flex-col justify-center items-center ">
@@ -52,7 +24,6 @@ const Product = ({ title, image, id, onIdChange,price  }) => {
         <button
           className="mr-5  w-[70px] rounded-xl bg-[orange]"
           onClick={handlePurchase}
-
         >
           Purchase
         </button>
