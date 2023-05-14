@@ -69,7 +69,10 @@ const Header = ({ loadcart, cartLength, setCartLength }) => {
             <button onClick={() => setShowModal(!showModal)}>X</button>
           </div>
 
-          <Cart loadcart={loadcart} setCartLength={setCartLength} />
+          <Cart
+            loadcart={loadcart}
+            setCartLength={setCartLength}
+          />
         </div>
       </div>
     </header>

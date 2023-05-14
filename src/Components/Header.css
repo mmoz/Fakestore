@@ -7,7 +7,7 @@
   padding: 1rem;
   border: 2px solid black;
   z-index: 9999;
-  width: 80vw;
+  width: 85vw;
   height: 80vh;
   overflow-y: auto !important;
 }
