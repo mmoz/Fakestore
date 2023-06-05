@@ -16,6 +16,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [loadcart, setLoadcart] = useState(false);
   const [cartLength, setCartLength] = useState(0);
+  const [loadingdes, setLoadingDes] = useState(false);
 
   const handlePurchase = (item) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -54,22 +55,6 @@ function App() {
     setCartLength(totalQuantity);
   }, [cart]);
 
-  //fetch API ของ ProductId ที่ถูกเลือก
-  const fetchDes = async () => {
-    setDescription({}); // or setDescription(null);
-    const res = await fetch(
-      `https://fakestoreapi.com/products/${selectedProductId}`
-    );
-    if (res.ok) {
-      try {
-        const data = await res.json();
-        setDescription(data);
-      } catch (error) {}
-    } else {
-      console.log(`Error: ${res.status} - ${res.statusText}`);
-    }
-  };
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -86,21 +71,39 @@ function App() {
   }, []);
 
   useEffect(() => {
+    //fetch API ของ ProductId ที่ถูกเลือก
+    const fetchDes = async () => {
+      setLoadingDes(false);
+      setDescription({}); // or setDescription(null);
+      const res = await fetch(
+        `https://fakestoreapi.com/products/${selectedProductId}`
+      );
+      if (res.ok) {
+        try {
+          const data = await res.json();
+          setDescription(data);
+          setLoadingDes(true);
+        } catch (error) {}
+      } else {
+        console.log(`Error: ${res.status} - ${res.statusText}`);
+      }
+    };
+
     fetchDes();
   }, [selectedProductId]);
 
   // เซ็ตค่า SelectedProductId ให้เท่ากับ id ที่ส่งมา
   const handleIdChange = (id) => {
     setSelectedProductId(id);
-    localStorage.setItem("selectedProductId", id);
+    // localStorage.setItem("selectedProductId", id);
   };
 
-  useEffect(() => {
-    const cachedSelectedProductId = localStorage.getItem("selectedProductId");
-    if (cachedSelectedProductId) {
-      setSelectedProductId(cachedSelectedProductId);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const cachedSelectedProductId = localStorage.getItem("selectedProductId");
+  //   if (cachedSelectedProductId) {
+  //     setSelectedProductId(cachedSelectedProductId);
+  //   }
+  // }, []);
 
   return (
     loading && (
@@ -142,6 +145,8 @@ function App() {
                   key={description.id}
                   selectedProductId={selectedProductId}
                   setDescription={setDescription}
+                  handlePurchase={() => handlePurchase(description)}
+                  loadingdes={loadingdes}
                 />
               }
             ></Route>

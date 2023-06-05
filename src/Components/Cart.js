@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const Cart = ({ loadcart, setCartLength }) => {
   const [cart, setCart] = useState([]);
-  const [number, setNumber] = useState("");
+  const [ ,setNumber] = useState("");
 
   //อัพเดทตะกร้าสินค้า
   useEffect(() => {
@@ -81,7 +81,7 @@ const Cart = ({ loadcart, setCartLength }) => {
               {item.id}
             </div>
             <div className="flex justify-center items-center">
-              <img src={item.image} className="w-[5vw] object-fit" />
+              <img src={item.image} alt="cartimg" className="w-[5vw] object-fit" />
             </div>
             <div className="flex justify-center items-center">
               <button onClick={() => increaseQuantity(item.id)}>+</button>
