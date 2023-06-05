@@ -1,8 +1,8 @@
 *{
   box-sizing: border-box;
 }
-body{
-  overflow-x: hidden !important;
+body,html{
+  overflow-x: hidden;
 }
 [data-tooltip]::before {
   content: attr(data-tooltip);

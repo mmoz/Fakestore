@@ -95,15 +95,15 @@ function App() {
   // เซ็ตค่า SelectedProductId ให้เท่ากับ id ที่ส่งมา
   const handleIdChange = (id) => {
     setSelectedProductId(id);
-    // localStorage.setItem("selectedProductId", id);
+    localStorage.setItem("selectedProductId", id);
   };
 
-  // useEffect(() => {
-  //   const cachedSelectedProductId = localStorage.getItem("selectedProductId");
-  //   if (cachedSelectedProductId) {
-  //     setSelectedProductId(cachedSelectedProductId);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const cachedSelectedProductId = localStorage.getItem("selectedProductId");
+    if (cachedSelectedProductId) {
+      setSelectedProductId(cachedSelectedProductId);
+    }
+  }, []);
 
   return (
     loading && (
@@ -119,7 +119,7 @@ function App() {
             <Route
               path="/"
               element={
-                <>
+                <div>
                   <div className="mt-10">
                     <h1 className="text-center">Product</h1>
                     <div className="flex justify-end mr-[1.5vw] mt-[20px]">
@@ -142,7 +142,7 @@ function App() {
                         />
                       ))}
                   </div>
-                </>
+                </div>
               }
             ></Route>
             <Route

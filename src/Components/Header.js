@@ -9,7 +9,7 @@ const Header = ({ loadcart, cartLength, setCartLength }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <header className="border-2 h-auto bg-[orange] sm:h-[150vh] md:h-auto">
+    <header className=" h-auto bg-[orange] sm:h-auto md:h-auto">
       <nav className="h-[2.5rem] flex justify-between">
         <ul className="flex justify-between w-[31.25rem] mt-[0.3125rem] ml-[3.75rem] text-white md:justify-evenly">
           <li>
@@ -21,16 +21,16 @@ const Header = ({ loadcart, cartLength, setCartLength }) => {
           </li>
           <li>about us</li>
         </ul>
-        <div className="mt-[0.625rem] mr-[5%] relative">
+        <div className="mt-[0.625rem] mr-[5vw] relative">
           <button onClick={() => setShowModal(!showModal)}>
             <AiOutlineShoppingCart />
           </button>
-          <div className="absolute top-[-30%] right-[-20%]">
+          <div className="absolute top-[-30%] right-[25%]">
             <span className="text-sm ">{cartLength}</span>
           </div>
         </div>
       </nav>
-      <div className="flex justify-between w-[100%] mt-[3.75rem] sm:items-center sm:ml-0 sm:flex-wrap md:flex-wrap md:items-center md:justify-center">
+      <div className="flex justify-between w-[95vw] mt-[3.75rem] sm:items-center sm:ml-0 sm:flex-wrap md:flex-wrap md:items-center md:justify-center">
         <div className="max-w-[25rem]  mr-[3.75rem] order-2 sm:order-1 mt-5 sm:ml-20 ">
           <img
             src={Headphone}
@@ -58,7 +58,7 @@ const Header = ({ loadcart, cartLength, setCartLength }) => {
             <button className="mr-5 bg-white rounded-3xl w-[6.25rem] text-[orange]">
               Purchase
             </button>
-            <button className="mr-5 bg-transparent rounded-3xl w-[6.25rem] text-white bg-transparent border-2  ">
+            <button className="mr-5  rounded-3xl w-[6.25rem] text-white bg-transparent border-2  ">
               More
             </button>
           </div>
@@ -69,10 +69,7 @@ const Header = ({ loadcart, cartLength, setCartLength }) => {
             <button onClick={() => setShowModal(!showModal)}>X</button>
           </div>
 
-          <Cart
-            loadcart={loadcart}
-            setCartLength={setCartLength}
-          />
+          <Cart loadcart={loadcart} setCartLength={setCartLength} />
         </div>
       </div>
     </header>
