@@ -122,6 +122,14 @@ function App() {
                 <>
                   <div className="mt-10">
                     <h1 className="text-center">Product</h1>
+                    <div className="flex justify-end mr-[1.5vw] mt-[20px]">
+                      <div className="block">
+                        <span>Search</span>
+                        <div className="">
+                          <input type="text" className="border-2"></input>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
                     {data &&
