@@ -8,10 +8,10 @@ const Product = ({ title, image, id, onIdChange, price, handlePurchase }) => {
 
   return (
     <div className="w-[250px] relative m-auto mt-5  h-[300px] flex flex-col justify-center items-center ">
-      <div className="flex items-center justify-center  h-[150px] w-[20vw] ">
+      <div className="flex items-center justify-center  h-[150px] w-[96vw] ">
         <img src={image} alt={title} className="w-[80px]"></img>
       </div>
-      <div className="flex items-center justify-center  w-[20vw] pb-[5px]  ">
+      <div className="flex items-center justify-center  w-[95vw] pb-[5px]  ">
         <h1
           className="text-sm max-w-[200px] truncate hover:tooltip cursor-pointer"
           data-tooltip={title}

@@ -1,9 +1,8 @@
 *{
   box-sizing: border-box;
 }
-body,html{
-  overflow-x: hidden;
-}
+
+
 [data-tooltip]::before {
   content: attr(data-tooltip);
   position: absolute;

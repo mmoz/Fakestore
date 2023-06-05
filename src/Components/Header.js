@@ -9,7 +9,7 @@ const Header = ({ loadcart, cartLength, setCartLength }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <header className=" h-auto bg-[orange] sm:h-auto md:h-auto">
+    <header className="border-2 h-auto bg-[orange] sm:h-auto md:h-auto">
       <nav className="h-[2.5rem] flex justify-between">
         <ul className="flex justify-between w-[31.25rem] mt-[0.3125rem] ml-[3.75rem] text-white md:justify-evenly">
           <li>
@@ -25,7 +25,7 @@ const Header = ({ loadcart, cartLength, setCartLength }) => {
           <button onClick={() => setShowModal(!showModal)}>
             <AiOutlineShoppingCart />
           </button>
-          <div className="absolute top-[-30%] right-[25%]">
+          <div className="absolute top-[-30%] right-[-20%]">
             <span className="text-sm ">{cartLength}</span>
           </div>
         </div>
