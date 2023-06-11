@@ -1,0 +1,91 @@
+.btn button {
+ border: none;
+ color: #fff;
+ background-image: linear-gradient(30deg, #0400ff, #4ce3f7);
+ border-radius: 20px;
+ background-size: 100% auto;
+ font-family: inherit;
+ font-size: 17px;
+ padding: 0.6em 1.5em;
+}
+
+button:hover {
+ background-position: right center;
+ background-size: 200% auto;
+ -webkit-animation: pulse 2s infinite;
+ animation: pulse512 1.5s infinite;
+}
+
+@-webkit-keyframes pulse512 {
+ 0% {
+  -webkit-box-shadow: 0 0 0 0 #05bada66;
+          box-shadow: 0 0 0 0 #05bada66;
+ }
+
+ 70% {
+  -webkit-box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+          box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+ }
+
+ 100% {
+  -webkit-box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+          box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+ }
+}
+
+@keyframes pulse512 {
+ 0% {
+  -webkit-box-shadow: 0 0 0 0 #05bada66;
+          box-shadow: 0 0 0 0 #05bada66;
+ }
+
+ 70% {
+  -webkit-box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+          box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+ }
+
+ 100% {
+  -webkit-box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+          box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+ }
+}
+
+/* svg {
+ width: 3.25em;
+ transform-origin: center;
+ animation: rotate4 2s linear infinite;
+}
+
+circle {
+ fill: none;
+ stroke: hsl(214, 97%, 59%);
+ stroke-width: 2;
+ stroke-dasharray: 1, 200;
+ stroke-dashoffset: 0;
+ stroke-linecap: round;
+ animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+ 100% {
+  transform: rotate(360deg);
+ }
+}
+
+@keyframes dash4 {
+ 0% {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+ }
+
+ 50% {
+  stroke-dasharray: 90, 200;
+  stroke-dashoffset: -35px;
+ }
+
+ 100% {
+  stroke-dashoffset: -125px;
+ }
+} */
+
+

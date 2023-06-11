@@ -21,11 +21,11 @@ const Header = ({ loadcart, cartLength, setCartLength }) => {
           </li>
           <li>about us</li>
         </ul>
-        <div className="mt-[0.625rem] mr-[5vw] relative">
+        <div className="mt-[0.625rem] mr-[5vw] relative overflow-x-hidden">
           <button onClick={() => setShowModal(!showModal)}>
             <AiOutlineShoppingCart />
           </button>
-          <div className="absolute top-[-30%] right-[-20%]">
+          <div className="absolute top-[-30%] right-[20%]">
             <span className="text-sm ">{cartLength}</span>
           </div>
         </div>

@@ -90,12 +90,12 @@ function App() {
     };
 
     fetchDes();
-  }, [selectedProductId]);
+  }, [selectedProductId],[]);
 
   // เซ็ตค่า SelectedProductId ให้เท่ากับ id ที่ส่งมา
   const handleIdChange = (id) => {
     setSelectedProductId(id);
-    localStorage.setItem("selectedProductId", id);
+    // localStorage.setItem("selectedProductId", id);
   };
 
   useEffect(() => {
@@ -139,6 +139,7 @@ function App() {
                           {...item}
                           onIdChange={handleIdChange}
                           handlePurchase={() => handlePurchase(item)}
+                          loading={loading}
                         />
                       ))}
                   </div>
