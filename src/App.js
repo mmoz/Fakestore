@@ -140,7 +140,7 @@ function App() {
                   <div className="mt-10">
                     <h1 className="text-center">Product</h1>
                     <div className="flex justify-end mr-[1.5vw] mt-[20px]">
-                      <form className="form">
+                      {/* <form className="form">
                         <button>
                           <svg
                             width="17"
@@ -183,7 +183,7 @@ function App() {
                             ></path>
                           </svg>
                         </button>
-                      </form>
+                      </form> */}
                     </div>
                   </div>
                   <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">

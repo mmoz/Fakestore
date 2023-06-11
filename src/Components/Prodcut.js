@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import './product.css'
+
 const Product = ({ title, image, id, onIdChange, loading, handlePurchase }) => {
   //ส่งค่า id มาเก็บไว้และส่งออกไปให้ App Component เรียกใช้
   const handleIdChange = () => {
@@ -27,7 +28,7 @@ const Product = ({ title, image, id, onIdChange, loading, handlePurchase }) => {
           Purchase
         </button>
         <Link to={`/description/${id}`}>
-          <button className="btn rounded-xl">
+          <button className="btn rounded-xl" onClick={handleIdChange}>
             <div>
               <span>
                 <p className="text-black">More</p>
