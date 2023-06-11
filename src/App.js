@@ -17,6 +17,8 @@ function App() {
   const [loadcart, setLoadcart] = useState(false);
   const [cartLength, setCartLength] = useState(0);
   const [loadingdes, setLoadingDes] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const handlePurchase = (item) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -70,32 +72,36 @@ function App() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    //fetch API ของ ProductId ที่ถูกเลือก
-    const fetchDes = async () => {
-      setLoadingDes(false);
-      setDescription({}); // or setDescription(null);
-      const res = await fetch(
-        `https://fakestoreapi.com/products/${selectedProductId}`
-      );
-      if (res.ok) {
-        try {
-          const data = await res.json();
-          setDescription(data);
-          setLoadingDes(true);
-        } catch (error) {}
-      } else {
-        console.log(`Error: ${res.status} - ${res.statusText}`);
-      }
-    };
+  useEffect(
+    () => {
+      //fetch API ของ ProductId ที่ถูกเลือก
+      const fetchDes = async () => {
+        setLoadingDes(false);
+        setDescription({}); // or setDescription(null);
+        const res = await fetch(
+          `https://fakestoreapi.com/products/${selectedProductId}`
+        );
+        if (res.ok) {
+          try {
+            const data = await res.json();
+            setDescription(data);
+            setLoadingDes(true);
+          } catch (error) {}
+        } else {
+          console.log(`Error: ${res.status} - ${res.statusText}`);
+        }
+      };
 
-    fetchDes();
-  }, [selectedProductId],[]);
+      fetchDes();
+    },
+    [selectedProductId],
+    []
+  );
 
   // เซ็ตค่า SelectedProductId ให้เท่ากับ id ที่ส่งมา
   const handleIdChange = (id) => {
     setSelectedProductId(id);
-    // localStorage.setItem("selectedProductId", id);
+    localStorage.setItem("selectedProductId", id);
   };
 
   useEffect(() => {
@@ -104,6 +110,17 @@ function App() {
       setSelectedProductId(cachedSelectedProductId);
     }
   }, []);
+
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+  };
+  const filteredData = searchText
+    ? data.filter(
+        (item) =>
+          item.title &&
+          item.title.toLowerCase().includes(searchText.toLowerCase())
+      )
+    : data;
 
   return (
     loading && (
@@ -123,23 +140,60 @@ function App() {
                   <div className="mt-10">
                     <h1 className="text-center">Product</h1>
                     <div className="flex justify-end mr-[1.5vw] mt-[20px]">
-                      <div className="block">
-                        <span>Search</span>
-                        <div className="">
-                          <input type="text" className="border-2"></input>
-                        </div>
-                      </div>
+                      <form className="form">
+                        <button>
+                          <svg
+                            width="17"
+                            height="16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            role="img"
+                            aria-labelledby="search"
+                          >
+                            <path
+                              d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+                              stroke="currentColor"
+                              strokeWidth="1.333"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            ></path>
+                          </svg>
+                        </button>
+                        <input
+                          className="input"
+                          placeholder="Search Here!"
+                          required=""
+                          type="text"
+                          onChange={handleSearch}
+                          value={searchText}
+                        />
+                        <button className="reset" type="reset">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M6 18L18 6M6 6l12 12"
+                            ></path>
+                          </svg>
+                        </button>
+                      </form>
                     </div>
                   </div>
                   <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
-                    {data &&
-                      data.map((item) => (
+                    {filteredData &&
+                      filteredData.map((item) => (
                         <Product
                           key={item.id}
                           {...item}
                           onIdChange={handleIdChange}
                           handlePurchase={() => handlePurchase(item)}
-                          loading={loading}
                         />
                       ))}
                   </div>

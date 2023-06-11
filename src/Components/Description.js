@@ -12,7 +12,7 @@ const Description = ({
   return (
     <div>
       {loadingdes ? (
-        <section className="flex justify-center mt-[50px] flex-wrap sm:w-[40vw] sm:m-auto sm:mt-[20px] h-[80vw]">
+        <section className="flex justify-center mt-[50px] h-[40vw] flex-wrap sm:w-[40vw] sm:m-auto sm:mt-[20px] ">
           <div className="w-[20vw] ">
             <img src={image} alt="images" />
           </div>
