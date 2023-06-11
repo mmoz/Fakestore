@@ -121,6 +121,10 @@ function App() {
           item.title.toLowerCase().includes(searchText.toLowerCase())
       )
     : data;
+  const handleFormReset = (e) => {
+    e.preventDefault();
+    setSearchText("");
+  };
 
   return (
     loading && (
@@ -140,8 +144,8 @@ function App() {
                   <div className="mt-10">
                     <h1 className="text-center">Product</h1>
                     <div className="flex justify-end mr-[1.5vw] mt-[20px]">
-                      {/* <form className="form">
-                        <button>
+                      <form className="form">
+                        <div>
                           <svg
                             width="17"
                             height="16"
@@ -158,7 +162,7 @@ function App() {
                               strokeLinejoin="round"
                             ></path>
                           </svg>
-                        </button>
+                        </div>
                         <input
                           className="input"
                           placeholder="Search Here!"
@@ -167,7 +171,7 @@ function App() {
                           onChange={handleSearch}
                           value={searchText}
                         />
-                        <button className="reset" type="reset">
+                        <button className="" onClick={handleFormReset}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -183,7 +187,7 @@ function App() {
                             ></path>
                           </svg>
                         </button>
-                      </form> */}
+                      </form>
                     </div>
                   </div>
                   <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
