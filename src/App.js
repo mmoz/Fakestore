@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Product from "./Components/Prodcut";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Description from "./Components/Description";
+import Searchbar from "./Components/searchbar";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -17,8 +18,8 @@ function App() {
   const [loadcart, setLoadcart] = useState(false);
   const [cartLength, setCartLength] = useState(0);
   const [loadingdes, setLoadingDes] = useState(false);
-  const [searchText, setSearchText] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [filteredData, setFilteredData] = useState(data);
+  const [filterText, setFilterText] = useState("");
 
   const handlePurchase = (item) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -111,19 +112,16 @@ function App() {
     }
   }, []);
 
-  const handleSearch = (e) => {
-    setSearchText(e.target.value);
+  const handleSearch = (filterText) => {
+    const filteredResults = data.filter((item) =>
+      item.title.toLowerCase().includes(filterText.toLowerCase())
+    );
+    setFilteredData(filteredResults);
+    setFilterText(filterText);
   };
-  const filteredData = searchText
-    ? data.filter(
-        (item) =>
-          item.title &&
-          item.title.toLowerCase().includes(searchText.toLowerCase())
-      )
-    : data;
-  const handleFormReset = (e) => {
-    e.preventDefault();
-    setSearchText("");
+  const handleReset = () => {
+    setFilteredData(data);
+    setFilterText("");
   };
 
   return (
@@ -144,50 +142,10 @@ function App() {
                   <div className="mt-10">
                     <h1 className="text-center">Product</h1>
                     <div className="flex justify-end mr-[1.5vw] mt-[20px]">
-                      <form className="form">
-                        <div>
-                          <svg
-                            width="17"
-                            height="16"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            role="img"
-                            aria-labelledby="search"
-                          >
-                            <path
-                              d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
-                              stroke="currentColor"
-                              strokeWidth="1.333"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            ></path>
-                          </svg>
-                        </div>
-                        <input
-                          className="input"
-                          placeholder="Search Here!"
-                          required=""
-                          type="text"
-                          onChange={handleSearch}
-                          value={searchText}
-                        />
-                        <button className="" onClick={handleFormReset}>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M6 18L18 6M6 6l12 12"
-                            ></path>
-                          </svg>
-                        </button>
-                      </form>
+                      <Searchbar
+                        onSearch={handleSearch}
+                        onReset={handleReset}
+                      />
                     </div>
                   </div>
                   <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
