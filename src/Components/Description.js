@@ -1,5 +1,4 @@
 import "./Description.css";
-import Zoom from "react-img-zoom";
 
 const Description = ({
   title,
@@ -23,7 +22,7 @@ const Description = ({
             <div className="flex justify-center text-[1.3rem] border-b">
               <h1> {price} USD</h1>
             </div>
-            <div className="mt-[10px] pl-[10px] flex justify-center border-b pb-[10px]">
+            <div className="mt-[10px] pl-[10px] flex justify-center border-b pb-[10px] sm:pl-0">
               <div className="text-center">
                 <h1 className="bold">Description</h1>
                 <div className="text-left sm:text-center">
@@ -31,7 +30,7 @@ const Description = ({
                 </div>
               </div>
             </div>
-            <div className="flex justify-center mt-[10px] btn">
+            <div className="flex justify-center mt-[10px] sm:m-auto btn">
               <button className="btn-cart" onClick={handlePurchase}>
                 Add to cart
               </button>

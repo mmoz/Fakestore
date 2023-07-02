@@ -5,6 +5,7 @@ import Product from "./Components/Prodcut";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Description from "./Components/Description";
 import Searchbar from "./Components/searchbar";
+import Navbar from "./Components/Navbar";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -19,7 +20,6 @@ function App() {
   const [cartLength, setCartLength] = useState(0);
   const [loadingdes, setLoadingDes] = useState(false);
   const [filteredData, setFilteredData] = useState(data);
-  const [filterText, setFilterText] = useState("");
 
   const handlePurchase = (item) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -117,20 +117,18 @@ function App() {
       item.title.toLowerCase().includes(filterText.toLowerCase())
     );
     setFilteredData(filteredResults);
-    setFilterText(filterText);
   };
   const handleReset = () => {
     setFilteredData(data);
-    setFilterText("");
   };
 
   return (
     loading && (
       <div className="App">
         <BrowserRouter>
-          <Header
-            loadcart={loadcart}
+          <Navbar
             cartLength={cartLength}
+            loadcart={loadcart}
             setCartLength={setCartLength}
           />
 
@@ -139,6 +137,11 @@ function App() {
               path="/"
               element={
                 <div>
+                  <Header
+                    // loadcart={loadcart}
+                    // cartLength={cartLength}
+                    // setCartLength={setCartLength}
+                  />
                   <div className="mt-10">
                     <h1 className="text-center">Product</h1>
                     <div className="flex justify-end mr-[1.5vw] mt-[20px]">

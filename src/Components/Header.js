@@ -1,16 +1,17 @@
 import Headphone from "../images/Headphone.jpg";
-import { Link } from "react-router-dom";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { useState } from "react";
 import "./Header.css";
-import Cart from "./Cart";
+
+// import { Link } from "react-router-dom";
+// import { AiOutlineShoppingCart } from "react-icons/ai";
+// import { useState } from "react";
+// import Cart from "./Cart";
 
 const Header = ({ loadcart, cartLength, setCartLength }) => {
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   return (
     <header className="border-2 h-auto bg-[orange] sm:h-auto md:h-auto">
-      <nav className="h-[2.5rem] flex justify-between">
+      {/* <nav className="h-[2.5rem] flex justify-between">
         <ul className="flex justify-between w-[31.25rem] mt-[0.3125rem] ml-[3.75rem] text-white md:justify-evenly">
           <li>
             <Link to="/">Home</Link>
@@ -29,7 +30,7 @@ const Header = ({ loadcart, cartLength, setCartLength }) => {
             <span className="text-sm ">{cartLength}</span>
           </div>
         </div>
-      </nav>
+      </nav> */}
       <div className="flex justify-between w-[95vw] mt-[3.75rem] sm:items-center sm:ml-0 sm:flex-wrap md:flex-wrap md:items-center md:justify-center">
         <div className="max-w-[25rem]  mr-[3.75rem] order-2 sm:order-1 mt-5 sm:ml-20 ">
           <img
@@ -63,14 +64,14 @@ const Header = ({ loadcart, cartLength, setCartLength }) => {
             </button>
           </div>
         </div>
-        <div className={showModal ? "modal" : "hidden"}>
+        {/* <div className={showModal ? "modal" : "hidden"}>
           <div className="flex justify-between">
             <h1>Product</h1>
             <button onClick={() => setShowModal(!showModal)}>X</button>
           </div>
 
           <Cart loadcart={loadcart} setCartLength={setCartLength} />
-        </div>
+        </div> */}
       </div>
     </header>
   );
